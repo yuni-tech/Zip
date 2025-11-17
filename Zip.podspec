@@ -50,6 +50,4 @@ Pod::Spec.new do |s|
     mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
     mz.libraries = 'z'
   end
-  
-  s.dependency 'Zip/Minizip'
 end
