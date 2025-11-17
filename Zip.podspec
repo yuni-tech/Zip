@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Zip"
-  s.version          = "2.1.2"
+  s.version          = "2.2.0"
   s.summary          = "Zip and unzip files in Swift."
   s.swift_version    = "5.3"
   s.swift_versions   = ["4.2", "5.0", "5.1", "5.3"]
@@ -24,16 +24,13 @@ Pod::Spec.new do |s|
 
   s.homepage         = "https://github.com/yuni-tech/Zip"
   s.license          = 'MIT'
-  s.author           = { "Roy Marmelstein" => "marmelroy@gmail.com" }
-  s.source           = { :git => "https://github.com/yuni-tech/Zip.git", :branch => "yuni"}
-  s.social_media_url   = "http://twitter.com/marmelroy"
+  s.source           = { :git => "https://github.com/yuni-tech/Zip.git", :tag => s.version.to_s}
 
   s.ios.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
-  s.watchos.deployment_target = '3.0'
-  s.osx.deployment_target = '10.9'
-  s.requires_arc = true
-
+  s.watchos.deployment_target = '6.0'
+  s.osx.deployment_target = '11.0'
+  
   s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.c', 'Zip/minizip/include/*.h'
   s.public_header_files = 'Zip/Zip.h'
   s.private_header_files = 'Zip/minizip/include/*.h'
