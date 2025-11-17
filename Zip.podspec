@@ -39,16 +39,17 @@ Pod::Spec.new do |s|
   #s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
   #s.libraries = 'z'
   #s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
-  
+
   s.source_files = 'Zip/*.{swift,h}'
   s.public_header_files = 'Zip/*.h'
+  s.module_map = 'Zip/minizip/module/module.modulemap'
+  
   s.subspec 'Minizip' do |mz|
     mz.source_files = 'Zip/minizip/include/*.{c,h}'
     mz.public_header_files = 'Zip/minizip/include/*.{h}'
     mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
-    mz.module_map = 'Zip/minizip/module/module.modulemap'
     mz.libraries = 'z'
   end
   
-  s.dependency 'Zip/minizip'
+  s.dependency 'Zip/Minizip'
 end
