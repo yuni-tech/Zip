@@ -22,21 +22,33 @@ Pod::Spec.new do |s|
                       A Swift framework for zipping and unzipping files. Simple and quick to use. Built on top of minizip.
                      DESC
 
-  s.homepage         = "https://github.com/marmelroy/Zip"
+  s.homepage         = "https://github.com/yuni-tech/Zip"
   s.license          = 'MIT'
   s.author           = { "Roy Marmelstein" => "marmelroy@gmail.com" }
-  s.source           = { :git => "https://github.com/marmelroy/Zip.git", :tag => s.version.to_s}
+  s.source           = { :git => "https://github.com/yuni-tech/Zip.git", :tag => s.version.to_s}
   s.social_media_url   = "http://twitter.com/marmelroy"
 
-  s.ios.deployment_target = '9.0'
-  s.tvos.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
+  s.tvos.deployment_target = '11.0'
   s.watchos.deployment_target = '3.0'
   s.osx.deployment_target = '10.9'
   s.requires_arc = true
 
-  s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.{c,h}', 'Zip/minizip/include/*.{c,h}'
+  #s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.{c,h}', 'Zip/minizip/include/*.{c,h}'
+  #s.public_header_files = 'Zip/*.h'
+  #s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
+  #s.libraries = 'z'
+  #s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
+  
+  s.source_files = 'Zip/*.{swift,h}'
   s.public_header_files = 'Zip/*.h'
-  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
-  s.libraries = 'z'
-  s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
+  s.subspec 'Minizip' do |mz|
+    mz.source_files = 'Zip/minizip/include/*.{c,h}'
+    mz.public_header_files = 'Zip/minizip/include/*.{h}'
+    mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
+    mz.module_map = 'Zip/minizip/module/module.modulemap'
+    mz.libraries = 'z'
+  end
+  
+  s.dependency 'Zip/minizip'
 end
