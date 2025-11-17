@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/yuni-tech/Zip"
   s.license          = 'MIT'
   s.author           = { "Roy Marmelstein" => "marmelroy@gmail.com" }
-  s.source           = { :git => "https://github.com/yuni-tech/Zip.git", :tag => s.version.to_s}
+  s.source           = { :git => "https://github.com/yuni-tech/Zip.git", :branch => "yuni"}
   s.social_media_url   = "http://twitter.com/marmelroy"
 
   s.ios.deployment_target = '11.0'
@@ -34,20 +34,21 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.requires_arc = true
 
-  s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.{c,h}', 'Zip/minizip/include/*.{c,h}'
-  s.public_header_files = 'Zip/*.h', 'Zip/minizip/include/*.{h}'
-  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
+  s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.c', 'Zip/minizip/include/*.h'
+  s.public_header_files = 'Zip/Zip.h'
+  s.private_header_files = 'Zip/minizip/include/*.h'
   s.libraries = 'z'
-  s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
-
-  #s.source_files = 'Zip/*.{swift,h}'
-  #s.public_header_files = 'Zip/*.h'
-  #s.module_map = 'Zip/minizip/module/module.modulemap'
+  s.preserve_paths = 'Zip/minizip/module/module.modulemap'
   
-  #s.subspec 'Minizip' do |mz|
-    #mz.source_files = 'Zip/minizip/include/*.{c,h}'
-    #mz.public_header_files = 'Zip/minizip/include/*.{h}'
-    #mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
-    #mz.libraries = 'z'
-  #end
+  s.xcconfig = {
+    'HEADER_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/Zip/minizip/include',
+    'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES'
+  }
+  s.pod_target_xcconfig = {
+    'SWIFT_INCLUDE_PATHS' => '$(PODS_TARGET_SRCROOT)/Zip/minizip/module',
+    'HEADER_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/Zip/minizip/include',
+    'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+    'DEFINES_MODULE' => 'YES',
+    'USE_HEADERMAP' => 'NO'
+  }
 end
