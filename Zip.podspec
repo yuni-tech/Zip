@@ -34,20 +34,20 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.requires_arc = true
 
-  #s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.{c,h}', 'Zip/minizip/include/*.{c,h}'
-  #s.public_header_files = 'Zip/*.h'
-  #s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
-  #s.libraries = 'z'
-  #s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
+  s.source_files = 'Zip/*.{swift,h}', 'Zip/minizip/*.{c,h}', 'Zip/minizip/include/*.{c,h}'
+  s.public_header_files = 'Zip/*.h', 'Zip/minizip/include/*.{h}'
+  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Zip/Zip/minizip/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Zip/Zip/'}
+  s.libraries = 'z'
+  s.preserve_paths  = 'Zip/minizip/module/module.modulemap'
 
-  s.source_files = 'Zip/*.{swift,h}'
-  s.public_header_files = 'Zip/*.h'
-  s.module_map = 'Zip/minizip/module/module.modulemap'
+  #s.source_files = 'Zip/*.{swift,h}'
+  #s.public_header_files = 'Zip/*.h'
+  #s.module_map = 'Zip/minizip/module/module.modulemap'
   
-  s.subspec 'Minizip' do |mz|
-    mz.source_files = 'Zip/minizip/include/*.{c,h}'
-    mz.public_header_files = 'Zip/minizip/include/*.{h}'
-    mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
-    mz.libraries = 'z'
-  end
+  #s.subspec 'Minizip' do |mz|
+    #mz.source_files = 'Zip/minizip/include/*.{c,h}'
+    #mz.public_header_files = 'Zip/minizip/include/*.{h}'
+    #mz.preserve_paths = 'Zip/minizip/module/module.modulemap'
+    #mz.libraries = 'z'
+  #end
 end
